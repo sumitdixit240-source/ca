@@ -3,19 +3,20 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Pay Now - CA Mohit Dixit</title>
+<title>Payment | CA Mohit Dixit</title>
 <style>
 :root {
   --primary-color: #004aad;
   --accent-color: #ffc107;
   --text-color: #333;
+  --bg-color: #f8f9fa;
 }
 
 body {
   font-family: 'Segoe UI', Arial, sans-serif;
   margin: 0;
-  padding: 0;
-  background-color: #f8f9fa;
+  padding: 20px;
+  background-color: var(--bg-color);
   color: var(--text-color);
   display: flex;
   flex-direction: column;
@@ -28,85 +29,94 @@ header {
   color: white;
   text-align: center;
   width: 100%;
-  padding: 15px 10px;
-  font-size: 1.3em;
-  font-weight: 500;
+  padding: 20px;
+  font-size: 1.5em;
+  font-weight: bold;
 }
 
 .container {
-  width: 90%;
-  max-width: 500px;
+  width: 95%;
+  max-width: 650px;
   background: white;
   margin-top: 30px;
-  padding: 25px;
+  padding: 30px;
   border-radius: 12px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 6px 15px rgba(0,0,0,0.15);
   text-align: center;
 }
 
-.container h2 {
+h2 {
   color: var(--primary-color);
-  margin-bottom: 15px;
+  margin-bottom: 20px;
+  font-size: 1.6em;
 }
 
-.qr-img {
-  width: 200px;
-  margin: 20px 0;
-  border: 3px solid var(--primary-color);
-  border-radius: 8px;
+table { 
+  width: 100%; 
+  border-collapse: collapse; 
+  margin-bottom: 20px;
+}
+th, td { 
+  border: 1px solid #ccc; 
+  padding: 10px; 
+  text-align: left; 
+}
+th { 
+  background-color: var(--primary-color); 
+  color: #fff; 
 }
 
-.upi-details {
-  text-align: left;
-  background: #f1f1f1;
-  padding: 15px;
-  border-radius: 8px;
-  font-size: 1em;
-  margin: 15px 0;
-  line-height: 1.5;
+.total { 
+  font-weight: bold; 
+  text-align: right; 
+  font-size: 1.2em; 
+  margin-bottom: 20px; 
 }
-
-.upi-details strong { color: var(--primary-color); }
 
 input[type="text"] {
   width: 100%;
-  padding: 10px;
-  margin: 10px 0 15px 0;
+  padding: 12px;
+  margin: 10px 0;
   border-radius: 5px;
   border: 1px solid #ccc;
   font-size: 1em;
 }
 
-.btn-pay {
+.btn-pay, .btn-back {
   display: inline-block;
   padding: 12px 25px;
-  background-color: var(--accent-color);
-  color: #000;
-  border-radius: 5px;
-  text-decoration: none;
+  margin: 10px 5px 0 5px;
   font-weight: bold;
-  margin-top: 10px;
-  cursor: pointer;
-  transition: 0.3s;
-}
-
-.btn-pay:hover {
-  background-color: #e6b800;
-}
-
-.btn-back {
-  display: inline-block;
-  padding: 10px 20px;
-  background-color: var(--primary-color);
-  color: white;
   border-radius: 5px;
-  text-decoration: none;
+  cursor: pointer;
+  border: none;
   transition: 0.3s;
-  margin-top: 15px;
+  text-decoration: none;
 }
 
-.btn-back:hover {
-  background-color: #00388a;
+.btn-pay { background-color: var(--accent-color); color: #000; }
+.btn-pay:hover { background-color: #e6b800; }
+
+.btn-back { background-color: var(--primary-color); color: #fff; }
+.btn-back:hover { background-color: #00388a; }
+
+.upi-details {
+  text-align: left;
+  background: #f1f1f1;
+  padding: 15px 20px;
+  border-radius: 10px;
+  font-size: 1em;
+  margin: 15px 0;
+  line-height: 1.6;
+}
+
+.upi-details strong { color: var(--primary-color); }
+
+.qr-img { 
+  width: 200px; 
+  margin: 20px 0; 
+  border: 3px solid var(--primary-color); 
+  border-radius: 10px; 
 }
 
 footer {
@@ -116,83 +126,86 @@ footer {
   text-align: center;
   font-size: 0.9em;
 }
-
-@media (max-width: 600px) {
-  .qr-img { width: 150px; }
-  .container { padding: 20px; }
-}
 </style>
 </head>
 <body>
 
-<header>💳 Secure Payment - CA Mohit Dixit</header>
+<header>💳 Payment - CA Mohit K Dixit & Associates</header>
 
 <div class="container">
-  <h2>Scan & Pay via UPI</h2>
-  
-  <!-- Default QR Code -->
-  <img src="paytm-qr.png" alt="Paytm QR Code" class="qr-img">
+  <h2>Selected Services</h2>
 
-  <div class="upi-details">
-    <strong>Default UPI ID:</strong> 9310664643@paytm<br>
-    <strong>Name:</strong> CA Mohit Dixit<br>
-  </div>
+  <!-- Services Table -->
+  <table id="servicesTable">
+    <tr>
+      <th>Service Name</th>
+      <th>Price (₹)</th>
+    </tr>
+  </table>
 
-  <div class="upi-details" id="servicesList">
-    <!-- Selected services will be listed here -->
-  </div>
+  <div class="total">Grand Total: ₹<span id="grandTotal">0</span></div>
 
-  <div><strong>Grand Total: ₹<span id="grandTotal">0</span></strong></div>
-
+  <!-- Optional UPI Input -->
   <input type="text" id="upiId" placeholder="Enter your UPI ID (optional)">
-  <button class="btn-pay" id="payNow">Pay Now</button>
 
+  <button class="btn-pay" id="payNow">Pay Now</button>
   <a href="services.html" class="btn-back">← Back to Services</a>
+
+  <!-- Payment Summary -->
+  <div id="paymentSummary" style="display:none;">
+    <h2>Payment Details</h2>
+    <div class="upi-details">
+      <strong>Business Name:</strong> CA Mohit K Dixit & Associates<br>
+      <strong>UPI ID:</strong> 9871775302@paytm<br>
+      <strong>Number of Items:</strong> <span id="itemCount">0</span><br>
+      <strong>Total Amount:</strong> ₹<span id="totalAmount">0.00</span>
+    </div>
+    <img src="upi-qr.png" alt="UPI QR Code" class="qr-img">
+  </div>
 </div>
 
-<footer>&copy; 2025 CA Mohit Dixit | All Rights Reserved</footer>
+<footer>&copy; 2025 CA Mohit K Dixit & Associates | All Rights Reserved</footer>
 
 <script>
-  // Default your UPI ID
-  const defaultUpi = "9310664643@paytm";
+// Get selected services from query string
+const params = new URLSearchParams(window.location.search);
+const services = params.getAll('services[]');
+const total = params.get('total') || 0;
 
-  // Get URL params
-  const params = new URLSearchParams(window.location.search);
+const table = document.getElementById('servicesTable');
+let grandTotal = 0;
 
-  // Example: services=Tax Filing:2000,GST Return:1500,Audit:3000
-  const servicesParam = params.get("services") || "";
-  const invoiceNo = params.get("invoice") || "N/A";
+services.forEach(s => {
+  const [name, price] = s.split(':');
+  const row = table.insertRow();
+  const cell1 = row.insertCell(0);
+  const cell2 = row.insertCell(1);
+  cell1.textContent = name;
+  cell2.textContent = price;
+  grandTotal += parseFloat(price) || 0;
+});
 
-  const servicesListDiv = document.getElementById("servicesList");
-  let grandTotal = 0;
+document.getElementById('grandTotal').textContent = grandTotal.toFixed(2);
 
-  if(servicesParam) {
-    const servicesArray = servicesParam.split(",");
-    servicesArray.forEach(service => {
-      const [name, amount] = service.split(":");
-      grandTotal += parseFloat(amount) || 0;
+// Pay Now button click
+document.getElementById('payNow').addEventListener('click', () => {
+  table.style.display = 'none';
+  document.getElementById('grandTotal').parentElement.style.display = 'none';
+  document.getElementById('payNow').style.display = 'none';
 
-      const serviceDiv = document.createElement("div");
-      serviceDiv.innerHTML = `<strong>Service:</strong> ${name}<br><strong>Amount:</strong> ₹${amount}<br>`;
-      servicesListDiv.appendChild(serviceDiv);
-    });
-  } else {
-    servicesListDiv.innerHTML = "No services selected.";
-  }
+  const itemCount = services.length;
+  document.getElementById('itemCount').textContent = itemCount;
+  document.getElementById('totalAmount').textContent = grandTotal.toFixed(2);
 
-  document.getElementById("grandTotal").textContent = grandTotal.toFixed(2);
+  document.getElementById('paymentSummary').style.display = 'block';
 
-  // Pay Now button click
-  document.getElementById("payNow").addEventListener("click", () => {
-    let upiId = document.getElementById("upiId").value.trim();
-    if(!upiId) upiId = defaultUpi; // Use default if none entered
-
-    const upiLink = `upi://pay?pa=${upiId}&pn=${encodeURIComponent('CA Mohit Dixit')}&tn=${encodeURIComponent('Payment for Invoice ' + invoiceNo)}&am=${grandTotal}&cu=INR`;
-
-    // Redirect to UPI app
-    window.location.href = upiLink;
-  });
+  // Optional: Redirect to UPI app
+  // let upiIdInput = document.getElementById('upiId').value.trim() || '9871775302@paytm';
+  // const upiLink = `upi://pay?pa=${upiIdInput}&pn=${encodeURIComponent('CA Mohit K Dixit & Associates')}&tn=${encodeURIComponent('Invoice Payment')}&am=${grandTotal}&cu=INR`;
+  // window.location.href = upiLink;
+});
 </script>
 
 </body>
 </html>
+
