@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pay Now - CA Mohit Dixit</title>
+  <style>
+    :root {
+      --primary-color: #004aad;
+      --accent-color: #ffc107;
+      --text-color: #333;
+    }
+
+    body {
+      font-family: 'Segoe UI', Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f8f9fa;
+      color: var(--text-color);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 100vh;
+    }
+
+    header {
+      background-color: var(--primary-color);
+      color: white;
+      text-align: center;
+      width: 100%;
+      padding: 15px 10px;
+      font-size: 1.3em;
+      font-weight: 500;
+    }
+
+    .container {
+      width: 90%;
+      max-width: 500px;
+      background: white;
+      margin-top: 30px;
+      padding: 25px;
+      border-radius: 12px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      text-align: center;
+    }
+
+    .container h2 {
+      color: var(--primary-color);
+      margin-bottom: 15px;
+    }
+
+    .qr-img {
+      width: 200px;
+      margin: 20px 0;
+      border: 3px solid var(--primary-color);
+      border-radius: 8px;
+    }
+
+    .upi-details {
+      text-align: left;
+      background: #f1f1f1;
+      padding: 15px;
+      border-radius: 8px;
+      font-size: 1em;
+      margin: 15px 0;
+      line-height: 1.5;
+    }
+
+    .upi-details strong { color: var(--primary-color); }
+
+    .btn-back {
+      display: inline-block;
+      padding: 10px 20px;
+      background-color: var(--primary-color);
+      color: white;
+      border-radius: 5px;
+      text-decoration: none;
+      transition: 0.3s;
+    }
+
+    .btn-back:hover {
+      background-color: #00388a;
+    }
+
+    footer {
+      margin-top: auto;
+      padding: 20px;
+      color: #777;
+      text-align: center;
+      font-size: 0.9em;
+    }
+
+    @media (max-width: 600px) {
+      .qr-img { width: 150px; }
+      .container { padding: 20px; }
+    }
+  </style>
+</head>
+<body>
+  <header>💳 Secure Payment - CA Mohit Dixit</header>
+
+  <div class="container">
+    <h2>Scan & Pay via UPI</h2>
+    <img src="qr-code.png" alt="UPI QR Code" class="qr-img">
+    <!-- Replace qr-code.png with your actual QR code -->
+
+    <div class="upi-details">
+      <strong>UPI ID:</strong> mohitdixit@upi<br>
+      <strong>Name:</strong> CA Mohit Dixit<br>
+      <strong>Contact:</strong> +91 9876543210<br>
+      <strong>Amount:</strong> ₹<span id="amount"></span><br>
+      <strong>Service:</strong> <span id="name"></span><br>
+      <strong>Invoice No:</strong> <span id="invoice"></span>
+    </div>
+
+    <p>Please scan the QR code and complete your payment using any UPI app (Paytm, Google Pay, PhonePe, BHIM, etc.).</p>
+    <a href="services.html" class="btn-back">← Back to Services</a>
+  </div>
+
+  <footer>&copy; 2025 CA Mohit Dixit | All Rights Reserved</footer>
+
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    document.getElementById("name").textContent = params.get("name") || "N/A";
+    document.getElementById("invoice").textContent = params.get("invoice") || "N/A";
+    document.getElementById("amount").textContent = params.get("amount") || "N/A";
+  </script>
+</body>
+</html>

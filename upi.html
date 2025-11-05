@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pay Now - CA Mohit Dixit</title>
+  <style>
+    :root {
+      --primary-color: #004aad;
+      --accent-color: #ffc107;
+    }
+
+    body {
+      font-family: 'Segoe UI', Arial, sans-serif;
+      margin: 0;
+      background-color: #f8f9fa;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 100vh;
+      color: #333;
+      overflow-x: hidden;
+    }
+
+    /* HEADER */
+    header {
+      background-color: var(--primary-color);
+      color: white;
+      width: 100%;
+      text-align: center;
+      padding: 15px;
+      font-size: 1.3em;
+      font-weight: 500;
+      letter-spacing: 0.5px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Moving Text Banner */
+    header::after {
+      content: "💳 Secure Payment - Fast | Easy | Reliable 💳";
+      position: absolute;
+      width: 100%;
+      left: 100%;
+      top: 50%;
+      transform: translateY(-50%);
+      white-space: nowrap;
+      animation: moveText 15s linear infinite;
+      color: var(--accent-color);
+      font-weight: 600;
+    }
+
+    @keyframes moveText {
+      from { left: 100%; }
+      to { left: -100%; }
+    }
+
+    /* MAIN CONTAINER */
+    .container {
+      background: white;
+      width: 90%;
+      max-width: 500px;
+      padding: 25px;
+      margin: 40px auto;
+      border-radius: 10px;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+      text-align: center;
+      animation: zoomIn 1.5s ease;
+    }
+
+    /* Zoom-in animation for container */
+    @keyframes zoomIn {
+      from { transform: scale(0.8); opacity: 0; }
+      to { transform: scale(1); opacity: 1; }
+    }
+
+    .container h2 {
+      color: var(--primary-color);
+      animation: textZoom 2s ease-in-out infinite alternate;
+    }
+
+    /* Zooming text animation */
+    @keyframes textZoom {
+      from { transform: scale(1); }
+      to { transform: scale(1.1); }
+    }
+
+    /* QR IMAGE */
+    .qr-img {
+      width: 200px;
+      margin: 20px 0;
+      border: 3px solid var(--primary-color);
+      border-radius: 8px;
+      animation: float 3s ease-in-out infinite;
+    }
+
+    /* Floating effect for QR image */
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-8px); }
+    }
+
+    /* UPI DETAILS BOX */
+    .upi-details {
+      text-align: left;
+      background: #f1f1f1;
+      padding: 15px;
+      border-radius: 8px;
+      margin: 15px 0;
+      line-height: 1.6;
+      animation: fadeInUp 1.5s ease;
+    }
+
+    /* Smooth fade-in animation */
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .upi-details strong {
+      color: var(--primary-color);
+    }
+
+    /* BUTTON */
+    .btn-back {
+      display: inline-block;
+      background: var(--primary-color);
+      color: white;
+      padding: 10px 20px;
+      border-radius: 5px;
+      text-decoration: none;
+      transition: background 0.3s, transform 0.3s;
+    }
+
+    .btn-back:hover {
+      background: #00388a;
+      transform: scale(1.05);
+    }
+
+    /* FOOTER */
+    footer {
+      margin-top: auto;
+      padding: 15px;
+      color: #777;
+      text-align: center;
+      font-size: 0.9em;
+      background-color: #f1f1f1;
+      width: 100%;
+      box-shadow: 0 -2px 5px rgba(0,0,0,0.05);
+    }
+
+    @media (max-width: 600px) {
+      .qr-img { width: 150px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header>💳 Secure Payment - CA Mohit Dixit</header>
+
+  <!-- MAIN CONTAINER -->
+  <div class="container">
+    <h2>Scan & Pay via UPI</h2>
+    <img src="qr-code.png" alt="QR Code" class="qr-img">
+
+    <div class="upi-details">
+      <strong>UPI ID:</strong> mohitdixit@upi<br>
+      <strong>Name:</strong> CA Mohit Dixit<br>
+      <strong>Contact:</strong> +91 9876543210<br>
+      <strong>Service(s):</strong> <span id="name"></span><br>
+      <strong>Invoice No:</strong> <span id="invoice"></span><br>
+      <strong>Amount:</strong> ₹<span id="amount"></span>
+    </div>
+
+    <p>After scanning, confirm your payment using any UPI app (Paytm, GPay, PhonePe, etc.).</p>
+    <a href="services.html" class="btn-back">← Back to Services</a>
+  </div>
+
+  <!-- FOOTER -->
+  <footer>&copy; 2025 CA Mohit Dixit | All Rights Reserved</footer>
+
+  <!-- SCRIPT TO DISPLAY PARAMS -->
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    document.getElementById("name").textContent = params.get("name") || "N/A";
+    document.getElementById("invoice").textContent = params.get("invoice") || "N/A";
+    document.getElementById("amount").textContent = params.get("amount") || "0";
+  </script>
+
+</body>
+</html>

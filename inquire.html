@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Services | CA Mohit Dixit</title>
+  <style>
+    :root {
+      --primary-color: #002b5b;
+      --accent-color: #c49b0b;
+      --bg-light: #f5f7fa;
+      --text-dark: #222;
+    }
+
+    body {
+      margin: 0;
+      font-family: "Segoe UI", Tahoma, sans-serif;
+      background-color: var(--bg-light);
+      color: var(--text-dark);
+    }
+
+    header {
+      background-color: var(--primary-color);
+      color: white;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px 40px;
+      flex-wrap: wrap;
+    }
+
+    .logo h1 { font-size: 1.8em; margin: 0; }
+
+    nav ul {
+      list-style: none;
+      margin: 10px 0;
+      padding: 0;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+
+    nav ul li a {
+      color: white;
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    nav ul li a:hover, nav ul li a.active { color: var(--accent-color); }
+
+    main { max-width: 1200px; margin: 40px auto; padding: 20px; }
+
+    h2 { text-align: center; color: var(--primary-color); }
+    p.subtitle { text-align: center; color: #555; margin-bottom: 30px; }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 25px;
+    }
+
+    .service-card {
+      background: #fff;
+      border-radius: 10px;
+      box-shadow: 0 3px 8px rgba(0,0,0,0.08);
+      padding: 20px;
+      transition: 0.3s;
+      text-align: center;
+    }
+
+    .service-card:hover { transform: translateY(-5px); }
+
+    .price { color: var(--accent-color); font-weight: bold; margin: 10px 0; }
+
+    .add-btn {
+      background: var(--primary-color);
+      color: white;
+      border: none;
+      padding: 8px 15px;
+      border-radius: 5px;
+      cursor: pointer;
+      font-weight: 600;
+      transition: 0.3s;
+    }
+
+    .add-btn:hover { background: #001f44; }
+    .added { background: var(--accent-color) !important; }
+
+    .total-box {
+      text-align: center;
+      margin-top: 30px;
+      background: #fff;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 3px 8px rgba(0,0,0,0.1);
+    }
+
+    .btn-pay {
+      background-color: var(--accent-color);
+      color: white;
+      padding: 10px 25px;
+      border-radius: 6px;
+      text-decoration: none;
+      font-weight: 600;
+      display: inline-block;
+      margin-top: 10px;
+    }
+
+    .btn-pay:hover { background-color: #b5890a; }
+
+    footer {
+      background-color: var(--primary-color);
+      color: white;
+      text-align: center;
+      padding: 15px;
+      margin-top: 40px;
+    }
+
+    @media (max-width: 768px) {
+      header { flex-direction: column; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="logo"><h1>CA Mohit Dixit</h1></div>
+  <nav>
+    <ul>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="services.html" class="active">Services</a></li>
+      <li><a href="inquire.html">Inquire</a></li>
+      <li><a href="payment.html">Payment</a></li>
+    </ul>
+  </nav>
+</header>
+
+<main>
+  <h2>Our Professional Services</h2>
+  <p class="subtitle">Select the services you need and proceed to secure payment.</p>
+
+  <section class="services-grid" id="services">
+    <div class="service-card" data-name="Income Tax Service" data-price="1000">
+      <h3>Income Tax Services 🧾</h3>
+      <div class="price">₹1,000</div>
+      <p>Tax filing and planning services.</p>
+      <button class="add-btn" onclick="toggleService(this)">Add Service</button>
+    </div>
+
+    <div class="service-card" data-name="GST Service" data-price="1200">
+      <h3>GST Services 💼</h3>
+      <div class="price">₹1,200</div>
+      <p>GST return filing and registration.</p>
+      <button class="add-btn" onclick="toggleService(this)">Add Service</button>
+    </div>
+
+    <div class="service-card" data-name="Corporate Compliance" data-price="2000">
+      <h3>Corporate & ROC Compliance 🏢</h3>
+      <div class="price">₹2,000</div>
+      <p>Company compliance and legal filings.</p>
+      <button class="add-btn" onclick="toggleService(this)">Add Service</button>
+    </div>
+
+    <div class="service-card" data-name="Audit Service" data-price="2500">
+      <h3>Audit & Assurance 🔍</h3>
+      <div class="price">₹2,500</div>
+      <p>Statutory and internal audits.</p>
+      <button class="add-btn" onclick="toggleService(this)">Add Service</button>
+    </div>
+  </section>
+
+  <div class="total-box">
+    <h3>Total Selected: ₹<span id="total">0</span></h3>
+    <a href="#" id="payNow" class="btn-pay" style="pointer-events:none;opacity:0.6;">Proceed to Pay</a>
+  </div>
+</main>
+
+<footer>
+  &copy; 2025 CA Mohit Dixit | All Rights Reserved
+</footer>
+
+<script>
+  function toggleService(btn) {
+    const card = btn.closest('.service-card');
+    const name = card.dataset.name;
+    const price = parseInt(card.dataset.price);
+
+    // Toggle added state
+    if (btn.classList.contains('added')) {
+      btn.classList.remove('added');
+      btn.textContent = 'Add Service';
+      card.dataset.selected = 'false';
+    } else {
+      btn.classList.add('added');
+      btn.textContent = 'Added ✅';
+      card.dataset.selected = 'true';
+    }
+    updateTotal();
+  }
+
+  function updateTotal() {
+    let total = 0;
+    let selected = [];
+
+    document.querySelectorAll('.service-card').forEach(card => {
+      if (card.dataset.selected === 'true') {
+        const name = card.dataset.name;
+        const price = parseInt(card.dataset.price);
+        total += price;
+        selected.push(name);
+      }
+    });
+
+    document.getElementById('total').textContent = total;
+    const payBtn = document.getElementById('payNow');
+
+    if (total > 0) {
+      const services = encodeURIComponent(selected.join(', '));
+      const invoice = 'INV' + Math.floor(Math.random() * 10000);
+      payBtn.href = `upi.html?name=${services}&invoice=${invoice}&amount=${total}`;
+      payBtn.style.pointerEvents = "auto";
+      payBtn.style.opacity = "1";
+    } else {
+      payBtn.href = "#";
+      payBtn.style.pointerEvents = "none";
+      payBtn.style.opacity = "0.6";
+    }
+  }
+</script>
+
+</body>
+</html>

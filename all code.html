@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CA Mohit Dixit - Chartered Accountant Services</title>
+    <!-- Load Tailwind CSS via CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Use Inter font -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
+
+    <!-- Internal CSS (as requested) for custom styles and scroll behavior -->
+    <style>
+        :root {
+            --primary-color: #1e3a8a; /* Deep Blue */
+            --secondary-color: #fcd34d; /* Amber/Gold */
+            --text-color: #374151; /* Dark Gray */
+            --bg-light: #f9fafb; /* Off-White */
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            color: var(--text-color);
+            background-color: white;
+            scroll-behavior: smooth;
+        }
+        .section-title {
+            color: var(--primary-color);
+            border-bottom: 4px solid var(--secondary-color);
+            display: inline-block;
+            padding-bottom: 4px;
+        }
+        /* Custom Button Style for the Payment Gateway (Enhanced Aesthetics) */
+        .payment-button {
+            background-color: var(--secondary-color);
+            color: var(--primary-color);
+            transition: all 0.2s;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.06);
+        }
+        .payment-button:hover {
+            background-color: #fbbf24; /* Darker Amber */
+            transform: translateY(-2px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1);
+        }
+        /* Style for the Modal (to avoid using alert() - still needed for Inquiry success/error) */
+        .modal-overlay {
+            z-index: 50;
+            display: none;
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <!-- Modal for Inquiry Status / General Messages (Still useful for non-payment messages) -->
+    <div id="status-modal" class="modal-overlay fixed inset-0 bg-gray-900 bg-opacity-75 flex items-center justify-center p-4">
+        <div id="modal-content" class="bg-white p-6 rounded-xl shadow-2xl max-w-sm w-full transform transition-all">
+            <h3 id="modal-title" class="text-2xl font-bold mb-3 text-primary-color">Notification</h3>
+            <p id="modal-message" class="text-gray-700 mb-6">Details here.</p>
+            <button onclick="closeStatusModal()" class="w-full bg-primary-color text-white py-2 rounded-lg hover:bg-blue-800 transition">Close</button>
+        </div>
+    </div>
+    
+    <!-- Navigation Bar -->
+    <header class="sticky top-0 bg-white shadow-md z-30">
+        <nav class="container mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
+            <div class="text-2xl font-extrabold text-primary-color tracking-wide">
+                CA Mohit Dixit <span class="text-secondary-color text-lg"> & Associates</span>
+            </div>
+            <div class="hidden md:flex space-x-8">
+                <a href="#home" class="text-gray-600 hover:text-primary-color transition font-medium">Home</a>
+                <a href="#services" class="text-gray-600 hover:text-primary-color transition font-medium">Services</a>
+                <a href="#payment" class="text-gray-600 hover:text-primary-color transition font-medium">Payments</a>
+                <a href="#inquiry" class="text-gray-600 hover:text-primary-color transition font-medium">Inquire Now</a>
+                <a href="#contact" class="text-gray-600 hover:text-primary-color transition font-medium">Contact</a>
+            </div>
+            <!-- Mobile Menu Button (Hamburger) -->
+            <button id="mobile-menu-button" class="md:hidden text-primary-color focus:outline-none">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+            </button>
+        </nav>
+        <!-- Mobile Menu Dropdown -->
+        <div id="mobile-menu" class="hidden md:hidden absolute w-full bg-white shadow-lg py-2">
+            <a href="#home" onclick="closeMobileMenu()" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Home</a>
+            <a href="#services" onclick="closeMobileMenu()" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Services</a>
+            <a href="#payment" onclick="closeMobileMenu()" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Payments</a>
+            <a href="#inquiry" onclick="closeMobileMenu()" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Inquire Now</a>
+            <a href="#contact" onclick="closeMobileMenu()" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Contact</a>
+        </div>
+    </header>
+
+    <!-- 1. Hero Section -->
+    <section id="home" class="py-20 lg:py-32 bg-bg-light">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8 flex flex-col lg:flex-row items-center justify-between">
+            <div class="lg:w-1/2 text-center lg:text-left mb-10 lg:mb-0">
+                <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold leading-tight text-gray-900 mb-4">
+                    CA Mohit Dixit
+                </h1>
+                <p class="text-xl sm:text-2xl font-semibold text-primary-color mb-6">
+                    Chartered Accountant | <span class="text-secondary-color">15+ Years Corporate Expertise</span>
+                </p>
+                <p class="text-lg text-gray-600 mb-8">
+                    Providing expert financial, tax, and compliance solutions to corporations and individuals across India. Experience the confidence of dedicated professional guidance.
+                </p>
+                <a href="#services" class="inline-block bg-secondary-color text-primary-color font-bold py-3 px-8 rounded-lg shadow-lg hover:bg-amber-400 transition transform hover:scale-105">
+                    Explore Our Services
+                </a>
+            </div>
+            <div class="lg:w-1/2 flex justify-center">
+                <!-- Placeholder for a professional image or logo -->
+                <div class="w-64 h-64 sm:w-80 sm:h-80 bg-primary-color rounded-full flex items-center justify-center shadow-xl p-4">
+                    <svg class="w-full h-full text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20v-2c0-.523-.204-1.03-.578-1.404C15.821 15.822 13.824 15 12 15c-1.825 0-3.822.822-4.422 1.596-.374.374-.578.88-.578 1.404v2h10zM12 3a4 4 0 100 8 4 4 0 000-8zM4 17.25C4 16.564 4.564 16 5.25 16h1.5a.75.75 0 00.75-.75V14.5a.75.75 0 00-.75-.75h-1.5a.75.75 0 00-.75.75v1.5a.75.75 0 00.75.75zM19 17.25C19 16.564 19.564 16 20.25 16h1.5a.75.75 0 00.75-.75V14.5a.75.75 0 00-.75-.75h-1.5a.75.75 0 00-.75.75v1.5a.75.75 0 00.75.75z"></path>
+                    </svg>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 2. Services Section (Tax, GST, etc.) -->
+    <section id="services" class="py-20 lg:py-28">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="section-title text-3xl sm:text-4xl font-bold mb-12 text-center">Our Core Services</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+
+                <!-- Service 1: Income Tax -->
+                <div class="bg-white p-6 rounded-xl shadow-lg hover:shadow-xl transition duration-300 border-t-4 border-secondary-color">
+                    <div class="text-4xl text-primary-color mb-4">📜</div>
+                    <h3 class="text-xl font-semibold mb-3">Income Tax Compliance</h3>
+                    <p class="text-gray-600">Filing of Income Tax Returns (ITR) for Individuals, HUFs, Firms, and Companies. Comprehensive tax planning and advisory.</p>
+                </div>
+
+                <!-- Service 2: GST Services -->
+                <div class="bg-white p-6 rounded-xl shadow-lg hover:shadow-xl transition duration-300 border-t-4 border-secondary-color">
+                    <div class="text-4xl text-primary-color mb-4">💰</div>
+                    <h3 class="text-xl font-semibold mb-3">GST Registration & Filing</h3>
+                    <p class="text-gray-600">End-to-end Goods and Services Tax compliance, including registration, monthly/quarterly return filing, and reconciliation.</p>
+                </div>
+
+                <!-- Service 3: Corporate Law & Audit -->
+                <div class="bg-white p-6 rounded-xl shadow-lg hover:shadow-xl transition duration-300 border-t-4 border-secondary-color">
+                    <div class="text-4xl text-primary-color mb-4">🏛️</div>
+                    <h3 class="text-xl font-semibold mb-3">Corporate & Statutory Audit</h3>
+                    <p class="text-gray-600">Statutory Audits, Internal Audits, and compliance with the Companies Act, ensuring regulatory adherence for corporate entities.</p>
+                </div>
+
+                <!-- Service 4: Business Consulting -->
+                <div class="bg-white p-6 rounded-xl shadow-lg hover:shadow-xl transition duration-300 border-t-4 border-secondary-color">
+                    <div class="text-4xl text-primary-color mb-4">📈</div>
+                    <h3 class="text-xl font-semibold mb-3">Financial Consulting</h3>
+                    <p class="text-gray-600">Advisory on financial restructuring, business strategy, cost control mechanisms, and debt management.</p>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- 3. Payment Gateway Section (Simulated UPI) -->
+    <section id="payment" class="py-20 lg:py-28 bg-gray-50">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8 max-w-2xl text-center">
+            <h2 class="section-title text-3xl sm:text-4xl font-bold mb-6 mx-auto">Online Payment Center (UPI)</h2>
+            <p class="text-lg text-gray-600 mb-10">Securely pay for your professional services using UPI. Enter the amount and client reference.</p>
+
+            <div class="bg-white p-8 rounded-xl shadow-2xl border border-gray-100">
+                
+                <!-- PAYMENT INPUT FORM (Initial View) -->
+                <div id="payment-input-form">
+                    <h3 class="text-xl font-semibold text-primary-color mb-4">Enter Payment Details</h3>
+                    <div class="mb-5">
+                        <label for="payment-amount" class="block text-left text-sm font-medium text-gray-700 mb-2">Amount to Pay (INR)</label>
+                        <input type="number" id="payment-amount" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-primary-color focus:border-primary-color" placeholder="e.g., 5000" min="100" value="5000">
+                    </div>
+                    <div class="mb-8">
+                        <label for="client-reference" class="block text-left text-sm font-medium text-gray-700 mb-2">Client Name / Reference ID</label>
+                        <input type="text" id="client-reference" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-primary-color focus:border-primary-color" placeholder="Your Name or Invoice Number">
+                    </div>
+                    
+                    <button onclick="processPayment()" class="payment-button w-full py-3 rounded-lg text-lg font-extrabold flex items-center justify-center">
+                        <svg class="w-6 h-6 mr-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M4 4a2 2 0 00-2 2v1h16V6a2 2 0 00-2-2H4z"></path><path fill-rule="evenodd" d="M18 9H2v7a2 2 0 002 2h12a2 2 0 002-2V9zM4.75 11a.75.75 0 01.75-.75h.01a.75.75 0 01.75.75v.01a.75.75 0 01-.75.75h-.01a.75.75 0 01-.75-.75V11zm2.25 0a.75.75 0 01.75-.75h.01a.75.75 0 01.75.75v.01a.75.75 0 01-.75.75H7a.75.75 0 01-.75-.75V11zm2.25 0a.75.75 0 01.75-.75h.01a.75.75 0 01.75.75v.01a.75.75 0 01-.75.75h-.01a.75.75 0 01-.75-.75V11zm2.25 0a.75.75 0 01.75-.75h.01a.75.75 0 01.75.75v.01a.75.75 0 01-.75.75h-.01a.75.75 0 01-.75-.75V11z" clip-rule="evenodd"></path></svg>
+                        Generate UPI QR / Pay Now
+                    </button>
+                    <p class="mt-4 text-xs text-gray-500">Clicking this will generate a QR code for payment.</p>
+                </div>
+
+
+                <!-- UPI QR DISPLAY SECTION (Initially Hidden) -->
+                <div id="payment-qr-display" class="hidden text-center transition duration-300">
+                    <h3 class="text-2xl font-bold text-primary-color mb-3">Scan to Pay Now</h3>
+                    
+                    <p class="text-xl font-medium mb-4">Total Amount: <span id="display-amount" class="text-red-600 font-extrabold"></span></p>
+
+                    <div class="flex justify-center mb-6 p-4 bg-gray-100 rounded-lg">
+                        <!-- QR Code Image -->
+                        <img id="upi-qr-code" src="" alt="UPI QR Code" class="w-48 h-48 sm:w-64 sm:h-64 rounded-lg shadow-lg transition duration-300 transform hover:scale-105" onerror="this.onerror=null; this.src='https://placehold.co/256x256/fcd34d/1e3a8a?text=QR+Code+Unavailable'">
+                    </div>
+                    
+                    <p class="text-center text-gray-700 mb-3 font-semibold">Scan this QR code using any UPI App.</p>
+                    
+                    <!-- UPI VPA details -->
+                    <div class="p-3 bg-blue-50 border border-blue-200 rounded-lg mb-6 text-center">
+                        <p class="text-sm font-medium text-gray-700">CA Mohit Dixit's UPI ID:</p>
+                        <p id="display-vpa" class="text-lg font-bold text-primary-color break-all"></p>
+                    </div>
+
+                    <!-- Deep Link Button for Mobile Users -->
+                    <a id="upi-deep-link-btn" href="#" target="_blank" class="w-full block text-center bg-green-600 text-white font-bold py-3 rounded-lg hover:bg-green-700 transition shadow-md">
+                        Launch UPI App (Mobile Only)
+                    </a>
+                    
+                    <!-- Back Button -->
+                    <button onclick="resetPayment()" class="mt-4 w-full border border-gray-300 text-gray-700 py-2 rounded-lg hover:bg-gray-100 transition">
+                        ← Enter Different Amount / Go Back
+                    </button>
+                    
+                    <p class="mt-4 text-xs text-center text-red-500">
+                        ⚠️ **Disclaimer:** This is a simulated gateway. Do NOT transfer real money to the placeholder UPI ID.
+                    </p>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- 4. Inquiry Form Section -->
+    <section id="inquiry" class="py-20 lg:py-28 bg-white">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8 max-w-xl">
+            <h2 class="section-title text-3xl sm:text-4xl font-bold mb-6 text-center mx-auto">Client Inquiry Form</h2>
+            <p class="text-center text-lg text-gray-600 mb-10">Submit your details and service requirement. We will contact you shortly.</p>
+
+            <form id="inquiry-form" class="bg-gray-50 p-8 rounded-xl shadow-2xl border border-primary-color/10">
+                <div class="mb-5">
+                    <label for="client-name" class="block text-sm font-medium text-gray-700 mb-2">Full Name</label>
+                    <input type="text" id="client-name" name="client-name" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-secondary-color focus:border-secondary-color" required placeholder="Enter your full name">
+                </div>
+                <div class="mb-5">
+                    <label for="client-email" class="block text-sm font-medium text-gray-700 mb-2">Email Address</label>
+                    <input type="email" id="client-email" name="client-email" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-secondary-color focus:border-secondary-color" required placeholder="Enter your email">
+                </div>
+                <div class="mb-5">
+                    <label for="client-phone" class="block text-sm font-medium text-gray-700 mb-2">Phone Number</label>
+                    <input type="tel" id="client-phone" name="client-phone" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-secondary-color focus:border-secondary-color" required placeholder="+91 98765 43210">
+                </div>
+                <div class="mb-6">
+                    <label for="client-service" class="block text-sm font-medium text-gray-700 mb-2">Service of Interest</label>
+                    <select id="client-service" name="client-service" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-secondary-color focus:border-secondary-color bg-white" required>
+                        <option value="" disabled selected>Select a Service</option>
+                        <option value="itr">Income Tax Return (ITR) Filing</option>
+                        <option value="gst">GST Registration / Compliance</option>
+                        <option value="audit">Statutory / Internal Audit</option>
+                        <option value="consulting">Business / Financial Consulting</option>
+                        <option value="other">Other Inquiry</option>
+                    </select>
+                </div>
+                <div class="mb-6">
+                    <label for="client-message" class="block text-sm font-medium text-gray-700 mb-2">Your Message / Requirements</label>
+                    <textarea id="client-message" name="client-message" rows="4" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-secondary-color focus:border-secondary-color" required placeholder="Briefly describe your requirements..."></textarea>
+                </div>
+
+                <button type="submit" class="w-full bg-primary-color text-white font-bold py-3 px-4 rounded-lg hover:bg-blue-800 transition transform hover:scale-[1.01]">
+                    Submit Inquiry (Simulated to MySQL)
+                </button>
+            </form>
+        </div>
+    </section>
+
+    <!-- 5. Footer & Contact -->
+    <footer id="contact" class="bg-primary-color text-white py-12">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 border-b border-gray-600 pb-8 mb-8">
+                <div>
+                    <h4 class="text-xl font-bold mb-4 text-secondary-color">CA Mohit Dixit</h4>
+                    <p class="text-gray-300">Chartered Accountant</p>
+                    <p class="text-sm text-gray-400 mt-2">15+ Years of Corporate Experience.</p>
+                </div>
+                <div>
+                    <h4 class="text-xl font-bold mb-4 text-secondary-color">Office Address</h4>
+                    <p class="text-gray-300">
+                        Naya Khand, Rail Vihar, Indirapuram, Ghaziabad.
+                    </p>
+                    <p class="text-gray-300 mt-1">
+                        Landmark: Near Yashoda Hospital.
+                    </p>
+                </div>
+                <div>
+                    <h4 class="text-xl font-bold mb-4 text-secondary-color">Contact Details</h4>
+                    <p class="text-gray-300">Email: contact@mohitdixitca.com</p>
+                    <p class="text-gray-300">Phone: +91 XXXXX XXXXX</p>
+                    <p class="text-gray-300">Timing: Mon - Sat, 10:00 AM - 6:00 PM</p>
+                </div>
+            </div>
+            <div class="text-center text-gray-400 text-sm">
+                &copy; 2025 CA Mohit Dixit & Associates. All Rights Reserved.
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript for Mobile Menu, Inquiry Form Submission, and Payment Simulation -->
+    <script>
+        // --- CONSTANTS ---
+        const CA_UPI_VPA = "camohitdixit@upi"; // Placeholder UPI ID
+        const CA_NAME = "CA Mohit Dixit";
+
+
+        document.addEventListener('DOMContentLoaded', () => {
+            // --- Mobile Menu Toggle Logic ---
+            const menuButton = document.getElementById('mobile-menu-button');
+            const mobileMenu = document.getElementById('mobile-menu');
+
+            menuButton.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+            });
+        });
+        
+        function closeMobileMenu() {
+             const mobileMenu = document.getElementById('mobile-menu');
+             if (mobileMenu) {
+                mobileMenu.classList.add('hidden');
+             }
+        }
+
+        // --- Status Modal Control Functions (Used for Inquiry Form success/error) ---
+        function showStatusModal(title, message, isError = false) {
+            const modalOverlay = document.getElementById('status-modal');
+            const modalTitle = document.getElementById('modal-title');
+            const modalMessage = document.getElementById('modal-message');
+            const modalContent = document.getElementById('modal-content');
+
+            modalTitle.textContent = title;
+            modalMessage.textContent = message;
+
+            if (isError) {
+                modalTitle.style.color = '#dc2626'; // Red
+                modalContent.style.borderTop = '5px solid #dc2626';
+            } else {
+                modalTitle.style.color = '#1e3a8a'; // Primary Color (Blue)
+                modalContent.style.borderTop = '5px solid #1e3a8a';
+            }
+            
+            modalOverlay.classList.remove('hidden');
+        }
+
+        function closeStatusModal() {
+            document.getElementById('status-modal').classList.add('hidden');
+        }
+
+        // --- Payment Gateway Logic (UPI Deep Link Generation and View Swap) ---
+        function processPayment() {
+            const amountInput = document.getElementById('payment-amount');
+            const referenceInput = document.getElementById('client-reference');
+            
+            const amount = amountInput.value;
+            const reference = referenceInput.value.trim();
+            const note = `Payment for services: ${reference}`.substring(0, 50);
+
+            if (!amount || parseFloat(amount) <= 0 || !reference) {
+                showStatusModal("Payment Error", "Please enter a valid amount and client reference (e.g., ITR-2024 or Your Name) to proceed.", true);
+                return;
+            }
+            
+            const sanitizedAmount = parseFloat(amount).toFixed(2);
+            
+            // 1. Construct the UPI Deep Link
+            // Mandator Parameters: pa (Payee Address), pn (Payee Name), am (Amount), cu (Currency)
+            const upiLink = `upi://pay?pa=${CA_UPI_VPA}&pn=${encodeURIComponent(CA_NAME)}&am=${sanitizedAmount}&cu=INR&tn=${encodeURIComponent(note)}`;
+
+            // 2. Generate QR Code URL
+            const qrCodeUrl = `https://api.qrserver.com/v1/create-qr-code/?size=512x512&data=${encodeURIComponent(upiLink)}`;
+            
+            // 3. Update the QR Display Section
+            document.getElementById('display-amount').textContent = `₹ ${sanitizedAmount}`;
+            document.getElementById('display-vpa').textContent = CA_UPI_VPA;
+            document.getElementById('upi-qr-code').src = qrCodeUrl;
+            document.getElementById('upi-deep-link-btn').href = upiLink;
+
+            // 4. Swap Views
+            document.getElementById('payment-input-form').classList.add('hidden');
+            document.getElementById('payment-qr-display').classList.remove('hidden');
+
+            console.log("Generated UPI Deep Link:", upiLink);
+        }
+
+        function resetPayment() {
+            // Switch back to the input form view
+            document.getElementById('payment-input-form').classList.remove('hidden');
+            document.getElementById('payment-qr-display').classList.add('hidden');
+        }
+
+
+        // --- Inquiry Form Submission Logic (Simulated MySQL) ---
+        document.getElementById('inquiry-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            const name = document.getElementById('client-name').value;
+            const email = document.getElementById('client-email').value;
+            const phone = document.getElementById('client-phone').value;
+            const service = document.getElementById('client-service').value;
+            const message = document.getElementById('client-message').value;
+
+            // Data structure that would be sent to a backend (like PHP/Node.js) 
+            // to be stored in the MySQL database.
+            const inquiryData = {
+                clientName: name,
+                clientEmail: email,
+                clientPhone: phone,
+                serviceRequested: service,
+                clientMessage: message,
+                timestamp: new Date().toISOString()
+            };
+
+            console.log("--- MySQL Data Payload Simulation ---");
+            console.log(inquiryData);
+            console.log("--- End of Payload ---");
+
+            // Clear the form
+            this.reset();
+
+            // Show success modal instead of alert()
+            showStatusModal(
+                "Inquiry Submitted!",
+                `Thank you, ${name}! Your request for ${service.toUpperCase()} has been recorded and is ready to be stored in the MySQL database. We will contact you at ${phone} shortly.`
+            );
+        });
+    </script>
+</body>
+</html>

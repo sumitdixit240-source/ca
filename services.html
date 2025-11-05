@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Services | CA Mohit Dixit</title>
+
+  <style>
+    :root {
+      --primary-color: #002b5b;       /* Deep Professional Blue */
+      --accent-color: #c49b0b;        /* Elegant Gold */
+      --bg-light: #f5f7fa;
+      --text-dark: #222;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: "Segoe UI", Tahoma, sans-serif;
+      background-color: var(--bg-light);
+      color: var(--text-dark);
+      line-height: 1.6;
+    }
+
+    header {
+      background-color: var(--primary-color);
+      color: white;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px 40px;
+      flex-wrap: wrap;
+    }
+
+    .logo h1 {
+      font-size: 1.8em;
+      margin: 0;
+    }
+
+    nav ul {
+      list-style: none;
+      margin: 10px 0;
+      padding: 0;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+
+    nav ul li a {
+      color: white;
+      text-decoration: none;
+      font-weight: 600;
+      transition: 0.3s;
+    }
+
+    nav ul li a:hover,
+    nav ul li a.active {
+      color: var(--accent-color);
+    }
+
+    main {
+      max-width: 1200px;
+      margin: 50px auto;
+      padding: 20px;
+    }
+
+    h2 {
+      text-align: center;
+      color: var(--primary-color);
+      margin-bottom: 10px;
+      font-size: 2em;
+    }
+
+    p.subtitle {
+      text-align: center;
+      color: #555;
+      margin-bottom: 40px;
+      font-size: 1.1em;
+    }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 25px;
+    }
+
+    .service-card {
+      background-color: #fff;
+      border-radius: 10px;
+      box-shadow: 0 3px 8px rgba(0,0,0,0.08);
+      padding: 25px;
+      transition: transform 0.3s, box-shadow 0.3s;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .service-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 6px 15px rgba(0,0,0,0.15);
+    }
+
+    .service-card h3 {
+      color: var(--primary-color);
+      font-size: 1.3em;
+      margin-bottom: 10px;
+      border-bottom: 2px solid var(--accent-color);
+      padding-bottom: 8px;
+    }
+
+    .service-card p {
+      color: #555;
+      font-size: 0.95em;
+      margin-bottom: 12px;
+    }
+
+    .service-card ul {
+      margin: 0;
+      padding-left: 18px;
+    }
+
+    .service-card li {
+      margin-bottom: 6px;
+      font-size: 0.93em;
+    }
+
+    .learn-more {
+      display: inline-block;
+      margin-top: 10px;
+      color: var(--accent-color);
+      text-decoration: none;
+      font-weight: 600;
+      transition: 0.3s;
+    }
+
+    .learn-more:hover {
+      text-decoration: underline;
+    }
+
+    footer {
+      background-color: var(--primary-color);
+      color: #fff;
+      text-align: center;
+      padding: 20px;
+      font-size: 0.9em;
+      margin-top: 50px;
+    }
+
+    .footer-address {
+      color: #ddd;
+      margin-top: 8px;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      header {
+        flex-direction: column;
+        text-align: center;
+      }
+
+      nav ul {
+        justify-content: center;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="logo">
+    <h1>CA Mohit Dixit</h1>
+  </div>
+  <nav>
+    <ul>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="services.html" class="active">Services</a></li>
+      <li><a href="inquire.html">Inquire</a></li>
+      <li><a href="payment.html">Payment</a></li>
+    </ul>
+  </nav>
+</header>
+
+<main>
+  <h2>Our Professional Services</h2>
+  <p class="subtitle">Offering expert tax, accounting, and business advisory services with over 15 years of professional experience.</p>
+
+  <section class="services-grid">
+    <div class="service-card">
+      <h3>Income Tax Services 🧾</h3>
+      <p>Comprehensive support for individuals, firms, and corporates in direct taxation.</p>
+      <ul>
+        <li>Income Tax Return (ITR) Filing for all categories</li>
+        <li>Tax Planning & Advisory for salary, business, and capital gains</li>
+        <li>Tax Audit under Section 44AB</li>
+        <li>Representation in Income Tax Scrutiny & Appeals</li>
+        <li>TDS/TCS Compliance and Reconciliation</li>
+      </ul>
+      <a href="inquire.html" class="learn-more">Consult Now →</a>
+    </div>
+
+    <div class="service-card">
+      <h3>GST Services 💼</h3>
+      <p>Expert assistance in all aspects of Goods & Services Tax compliance and advisory.</p>
+      <ul>
+        <li>GST Registration and Amendments</li>
+        <li>Monthly/Quarterly GST Return Filing (GSTR-1, 3B, 9, 9C)</li>
+        <li>GST Audit & Annual Reconciliation</li>
+        <li>Input Tax Credit (ITC) Management</li>
+        <li>GST Litigation, Notice & Advisory</li>
+      </ul>
+      <a href="inquire.html" class="learn-more">Get GST Help →</a>
+    </div>
+
+    <div class="service-card">
+      <h3>Corporate & ROC Compliance 🏢</h3>
+      <p>Ensuring complete legal and secretarial compliance for companies and LLPs.</p>
+      <ul>
+        <li>Company/LLP Incorporation, Conversion, or Closure</li>
+        <li>Annual ROC Filings (AOC-4, MGT-7, ADT-1)</li>
+        <li>Board Meeting & Resolution Drafting</li>
+        <li>Secretarial Audit & Maintenance of Statutory Registers</li>
+      </ul>
+      <a href="inquire.html" class="learn-more">Learn More →</a>
+    </div>
+
+    <div class="service-card">
+      <h3>Audit & Assurance 🔍</h3>
+      <p>Independent and transparent auditing services ensuring financial integrity.</p>
+      <ul>
+        <li>Statutory Audit under Companies Act</li>
+        <li>Internal & Management Audits</li>
+        <li>Tax Audit and Compliance Review</li>
+        <li>Due Diligence & Certification</li>
+      </ul>
+      <a href="inquire.html" class="learn-more">Request an Audit →</a>
+    </div>
+
+    <div class="service-card">
+      <h3>Business Registration & Startup Advisory 🚀</h3>
+      <p>Helping entrepreneurs and startups establish and grow successfully.</p>
+      <ul>
+        <li>Proprietorship, Partnership, or LLP Setup</li>
+        <li>Company Incorporation (Private/Public)</li>
+        <li>Startup India & MSME Registration</li>
+        <li>PAN, TAN, DSC & PF/ESI Registration</li>
+      </ul>
+      <a href="inquire.html" class="learn-more">Start Your Business →</a>
+    </div>
+
+    <div class="service-card">
+      <h3>Financial & Investment Advisory 💰</h3>
+      <p>Strategic insights to improve profitability and manage cash flow effectively.</p>
+      <ul>
+        <li>Business Valuation and Project Reports</li>
+        <li>Financial Forecasting & Budgeting</li>
+        <li>Loan, Funding & Investment Advisory</li>
+        <li>Virtual CFO Services on Retainer Basis</li>
+      </ul>
+      <a href="inquire.html" class="learn-more">Schedule Consultation →</a>
+    </div>
+  </section>
+
+  <p style="text-align:center; margin-top:40px;">
+    💬 Have a question or need expert help? 
+    <a href="inquire.html" style="color: var(--accent-color); font-weight: bold; text-decoration: underline;">Send an Inquiry Now</a>
+  </p>
+</main>
+
+<footer>
+  <p>&copy; 2025 CA Mohit Dixit | All Rights Reserved</p>
+  <div class="footer-address">
+    Office: Near Yashoda Hospital, Naya Khand, Rail Vihar, Indirapuram, Ghaziabad
+  </div>
+</footer>
+
+</body>
+</html>
