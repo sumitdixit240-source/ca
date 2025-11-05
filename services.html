@@ -1,177 +1,139 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Services | CA Mohit Dixit</title>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Services | CA Mohit Dixit</title>
+<style>
+:root {
+  --primary-color: #002b5b;
+  --accent-color: #c49b0b;
+  --bg-light: #f5f7fa;
+  --text-dark: #222;
+}
 
-  <style>
-    :root {
-      --primary-color: #002b5b;       /* Deep Professional Blue */
-      --accent-color: #c49b0b;        /* Elegant Gold */
-      --bg-light: #f5f7fa;
-      --text-dark: #222;
-    }
+* { box-sizing: border-box; }
 
-    * {
-      box-sizing: border-box;
-    }
+body {
+  margin: 0;
+  font-family: "Segoe UI", Tahoma, sans-serif;
+  background-color: var(--bg-light);
+  color: var(--text-dark);
+  line-height: 1.6;
+}
 
-    body {
-      margin: 0;
-      font-family: "Segoe UI", Tahoma, sans-serif;
-      background-color: var(--bg-light);
-      color: var(--text-dark);
-      line-height: 1.6;
-    }
+header {
+  background-color: var(--primary-color);
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 40px;
+  flex-wrap: wrap;
+}
 
-    header {
-      background-color: var(--primary-color);
-      color: white;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 15px 40px;
-      flex-wrap: wrap;
-    }
+.logo h1 { font-size: 1.8em; margin: 0; }
 
-    .logo h1 {
-      font-size: 1.8em;
-      margin: 0;
-    }
+nav ul {
+  list-style: none;
+  margin: 10px 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
 
-    nav ul {
-      list-style: none;
-      margin: 10px 0;
-      padding: 0;
-      display: flex;
-      flex-wrap: wrap;
-      gap: 20px;
-    }
+nav ul li a {
+  color: white;
+  text-decoration: none;
+  font-weight: 600;
+  transition: 0.3s;
+}
 
-    nav ul li a {
-      color: white;
-      text-decoration: none;
-      font-weight: 600;
-      transition: 0.3s;
-    }
+nav ul li a:hover,
+nav ul li a.active { color: var(--accent-color); }
 
-    nav ul li a:hover,
-    nav ul li a.active {
-      color: var(--accent-color);
-    }
+main { max-width: 1200px; margin: 50px auto; padding: 20px; }
 
-    main {
-      max-width: 1200px;
-      margin: 50px auto;
-      padding: 20px;
-    }
+h2 { text-align: center; color: var(--primary-color); margin-bottom: 10px; font-size: 2em; }
 
-    h2 {
-      text-align: center;
-      color: var(--primary-color);
-      margin-bottom: 10px;
-      font-size: 2em;
-    }
+p.subtitle { text-align: center; color: #555; margin-bottom: 40px; font-size: 1.1em; }
 
-    p.subtitle {
-      text-align: center;
-      color: #555;
-      margin-bottom: 40px;
-      font-size: 1.1em;
-    }
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 25px;
+}
 
-    .services-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 25px;
-    }
+.service-card {
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 3px 8px rgba(0,0,0,0.08);
+  padding: 25px;
+  transition: transform 0.3s, box-shadow 0.3s;
+  position: relative;
+  overflow: hidden;
+}
 
-    .service-card {
-      background-color: #fff;
-      border-radius: 10px;
-      box-shadow: 0 3px 8px rgba(0,0,0,0.08);
-      padding: 25px;
-      transition: transform 0.3s, box-shadow 0.3s;
-      position: relative;
-      overflow: hidden;
-    }
+.service-card:hover { transform: translateY(-5px); box-shadow: 0 6px 15px rgba(0,0,0,0.15); }
 
-    .service-card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 6px 15px rgba(0,0,0,0.15);
-    }
+.service-card h3 {
+  color: var(--primary-color);
+  font-size: 1.3em;
+  margin-bottom: 10px;
+  border-bottom: 2px solid var(--accent-color);
+  padding-bottom: 8px;
+}
 
-    .service-card h3 {
-      color: var(--primary-color);
-      font-size: 1.3em;
-      margin-bottom: 10px;
-      border-bottom: 2px solid var(--accent-color);
-      padding-bottom: 8px;
-    }
+.select-service {
+  display: flex;
+  align-items: center;
+  margin-top: 10px;
+  gap: 10px;
+}
 
-    .service-card p {
-      color: #555;
-      font-size: 0.95em;
-      margin-bottom: 12px;
-    }
+.service-total {
+  margin-top: 20px;
+  font-weight: bold;
+  text-align: right;
+  font-size: 1.1em;
+}
 
-    .service-card ul {
-      margin: 0;
-      padding-left: 18px;
-    }
+.btn-pay {
+  margin-top: 30px;
+  padding: 12px 25px;
+  background-color: var(--accent-color);
+  color: #000;
+  font-weight: bold;
+  border-radius: 5px;
+  cursor: pointer;
+  border: none;
+  transition: 0.3s;
+}
 
-    .service-card li {
-      margin-bottom: 6px;
-      font-size: 0.93em;
-    }
+.btn-pay:hover { background-color: #e6b800; }
 
-    .learn-more {
-      display: inline-block;
-      margin-top: 10px;
-      color: var(--accent-color);
-      text-decoration: none;
-      font-weight: 600;
-      transition: 0.3s;
-    }
+footer {
+  background-color: var(--primary-color);
+  color: #fff;
+  text-align: center;
+  padding: 20px;
+  font-size: 0.9em;
+  margin-top: 50px;
+}
 
-    .learn-more:hover {
-      text-decoration: underline;
-    }
+.footer-address { color: #ddd; margin-top: 8px; }
 
-    footer {
-      background-color: var(--primary-color);
-      color: #fff;
-      text-align: center;
-      padding: 20px;
-      font-size: 0.9em;
-      margin-top: 50px;
-    }
-
-    .footer-address {
-      color: #ddd;
-      margin-top: 8px;
-    }
-
-    /* Responsive */
-    @media (max-width: 768px) {
-      header {
-        flex-direction: column;
-        text-align: center;
-      }
-
-      nav ul {
-        justify-content: center;
-      }
-    }
-  </style>
+@media (max-width: 768px) {
+  header { flex-direction: column; text-align: center; }
+  nav ul { justify-content: center; }
+}
+</style>
 </head>
 <body>
 
 <header>
-  <div class="logo">
-    <h1>CA Mohit Dixit</h1>
-  </div>
+  <div class="logo"><h1>CA Mohit Dixit</h1></div>
   <nav>
     <ul>
       <li><a href="index.html">Home</a></li>
@@ -184,89 +146,61 @@
 </header>
 
 <main>
-  <h2>Our Professional Services</h2>
-  <p class="subtitle">Offering expert tax, accounting, and business advisory services with over 15 years of professional experience.</p>
+  <h2>Professional Services for Individuals & Companies</h2>
+  <p class="subtitle">Select services and see the total automatically.</p>
 
   <section class="services-grid">
+    <!-- Individual Services -->
     <div class="service-card">
       <h3>Income Tax Services 🧾</h3>
-      <p>Comprehensive support for individuals, firms, and corporates in direct taxation.</p>
-      <ul>
-        <li>Income Tax Return (ITR) Filing for all categories</li>
-        <li>Tax Planning & Advisory for salary, business, and capital gains</li>
-        <li>Tax Audit under Section 44AB</li>
-        <li>Representation in Income Tax Scrutiny & Appeals</li>
-        <li>TDS/TCS Compliance and Reconciliation</li>
-      </ul>
-      <a href="inquire.html" class="learn-more">Consult Now →</a>
+      <div class="select-service"><input type="checkbox" data-name="Individual IT Filing" data-price="1500" class="service-checkbox"><label>Individual IT Filing ₹1500</label></div>
+      <div class="select-service"><input type="checkbox" data-name="IT Filing (Audit)" data-price="3000" class="service-checkbox"><label>IT Filing (Audit) ₹3000</label></div>
+      <div class="select-service"><input type="checkbox" data-name="TDS Compliance" data-price="1200" class="service-checkbox"><label>TDS Compliance ₹1200</label></div>
     </div>
 
     <div class="service-card">
       <h3>GST Services 💼</h3>
-      <p>Expert assistance in all aspects of Goods & Services Tax compliance and advisory.</p>
-      <ul>
-        <li>GST Registration and Amendments</li>
-        <li>Monthly/Quarterly GST Return Filing (GSTR-1, 3B, 9, 9C)</li>
-        <li>GST Audit & Annual Reconciliation</li>
-        <li>Input Tax Credit (ITC) Management</li>
-        <li>GST Litigation, Notice & Advisory</li>
-      </ul>
-      <a href="inquire.html" class="learn-more">Get GST Help →</a>
+      <div class="select-service"><input type="checkbox" data-name="GSTR-3B Filing" data-price="1000" class="service-checkbox"><label>GSTR-3B Filing ₹1000</label></div>
+      <div class="select-service"><input type="checkbox" data-name="GSTR-1 Filing" data-price="800" class="service-checkbox"><label>GSTR-1 Filing ₹800</label></div>
+      <div class="select-service"><input type="checkbox" data-name="Annual GST Return" data-price="2500" class="service-checkbox"><label>Annual GST Return ₹2500</label></div>
     </div>
 
     <div class="service-card">
-      <h3>Corporate & ROC Compliance 🏢</h3>
-      <p>Ensuring complete legal and secretarial compliance for companies and LLPs.</p>
-      <ul>
-        <li>Company/LLP Incorporation, Conversion, or Closure</li>
-        <li>Annual ROC Filings (AOC-4, MGT-7, ADT-1)</li>
-        <li>Board Meeting & Resolution Drafting</li>
-        <li>Secretarial Audit & Maintenance of Statutory Registers</li>
-      </ul>
-      <a href="inquire.html" class="learn-more">Learn More →</a>
+      <h3>Company Registration & Compliance 🏢</h3>
+      <div class="select-service"><input type="checkbox" data-name="Private Ltd Registration" data-price="5000" class="service-checkbox"><label>Private Ltd Registration ₹5000</label></div>
+      <div class="select-service"><input type="checkbox" data-name="LLP Registration" data-price="4000" class="service-checkbox"><label>LLP Registration ₹4000</label></div>
+      <div class="select-service"><input type="checkbox" data-name="ROC Filings" data-price="2000" class="service-checkbox"><label>ROC Filings ₹2000</label></div>
     </div>
 
     <div class="service-card">
-      <h3>Audit & Assurance 🔍</h3>
-      <p>Independent and transparent auditing services ensuring financial integrity.</p>
-      <ul>
-        <li>Statutory Audit under Companies Act</li>
-        <li>Internal & Management Audits</li>
-        <li>Tax Audit and Compliance Review</li>
-        <li>Due Diligence & Certification</li>
-      </ul>
-      <a href="inquire.html" class="learn-more">Request an Audit →</a>
+      <h3>Audit & Advisory 🔍</h3>
+      <div class="select-service"><input type="checkbox" data-name="Internal Audit" data-price="3000" class="service-checkbox"><label>Internal Audit ₹3000</label></div>
+      <div class="select-service"><input type="checkbox" data-name="Due Diligence Audit" data-price="5000" class="service-checkbox"><label>Due Diligence Audit ₹5000</label></div>
+      <div class="select-service"><input type="checkbox" data-name="Tax Planning Advisory" data-price="2000" class="service-checkbox"><label>Tax Planning Advisory ₹2000</label></div>
     </div>
 
     <div class="service-card">
-      <h3>Business Registration & Startup Advisory 🚀</h3>
-      <p>Helping entrepreneurs and startups establish and grow successfully.</p>
-      <ul>
-        <li>Proprietorship, Partnership, or LLP Setup</li>
-        <li>Company Incorporation (Private/Public)</li>
-        <li>Startup India & MSME Registration</li>
-        <li>PAN, TAN, DSC & PF/ESI Registration</li>
-      </ul>
-      <a href="inquire.html" class="learn-more">Start Your Business →</a>
+      <h3>Financial Services 💰</h3>
+      <div class="select-service"><input type="checkbox" data-name="Monthly Bookkeeping" data-price="2000" class="service-checkbox"><label>Monthly Bookkeeping ₹2000</label></div>
+      <div class="select-service"><input type="checkbox" data-name="Annual Accounts Preparation" data-price="4000" class="service-checkbox"><label>Annual Accounts Preparation ₹4000</label></div>
+      <div class="select-service"><input type="checkbox" data-name="Virtual CFO" data-price="7000" class="service-checkbox"><label>Virtual CFO ₹7000</label></div>
     </div>
 
     <div class="service-card">
-      <h3>Financial & Investment Advisory 💰</h3>
-      <p>Strategic insights to improve profitability and manage cash flow effectively.</p>
-      <ul>
-        <li>Business Valuation and Project Reports</li>
-        <li>Financial Forecasting & Budgeting</li>
-        <li>Loan, Funding & Investment Advisory</li>
-        <li>Virtual CFO Services on Retainer Basis</li>
-      </ul>
-      <a href="inquire.html" class="learn-more">Schedule Consultation →</a>
+      <h3>Startup & MSME Services 🚀</h3>
+      <div class="select-service"><input type="checkbox" data-name="Startup Registration" data-price="3500" class="service-checkbox"><label>Startup Registration ₹3500</label></div>
+      <div class="select-service"><input type="checkbox" data-name="MSME Registration" data-price="1500" class="service-checkbox"><label>MSME Registration ₹1500</label></div>
+    </div>
+
+    <div class="service-card">
+      <h3>Payroll & HR Compliance 👥</h3>
+      <div class="select-service"><input type="checkbox" data-name="Payroll Processing" data-price="1500" class="service-checkbox"><label>Payroll Processing ₹1500</label></div>
+      <div class="select-service"><input type="checkbox" data-name="ESI/PF Compliance" data-price="1200" class="service-checkbox"><label>ESI/PF Compliance ₹1200</label></div>
     </div>
   </section>
 
-  <p style="text-align:center; margin-top:40px;">
-    💬 Have a question or need expert help? 
-    <a href="inquire.html" style="color: var(--accent-color); font-weight: bold; text-decoration: underline;">Send an Inquiry Now</a>
-  </p>
+  <div class="service-total">Total: ₹<span id="totalAmount">0</span></div>
+  <button class="btn-pay" onclick="proceedPayment()">Proceed to Payment</button>
 </main>
 
 <footer>
@@ -276,5 +210,30 @@
   </div>
 </footer>
 
+<script>
+// Auto-update total
+const checkboxes = document.querySelectorAll('.service-checkbox');
+const totalAmountEl = document.getElementById('totalAmount');
+
+checkboxes.forEach(cb => {
+  cb.addEventListener('change', () => {
+    let total = 0;
+    checkboxes.forEach(c => { if(c.checked) total += parseInt(c.dataset.price); });
+    totalAmountEl.textContent = total;
+  });
+});
+
+// Redirect to payment.html with selected services and total
+function proceedPayment() {
+  const selected = [];
+  checkboxes.forEach(cb => { if(cb.checked) selected.push(cb.dataset.name + ':' + cb.dataset.price); });
+
+  if(selected.length === 0) { alert("Please select at least one service."); return; }
+
+  const query = selected.map(s => 'services[]=' + encodeURIComponent(s)).join('&') + '&total=' + encodeURIComponent(totalAmountEl.textContent);
+  window.location.href = 'payment.html?' + query;
+}
+</script>
 </body>
 </html>
+
